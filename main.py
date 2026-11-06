@@ -70,7 +70,7 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tableWidget.show()
             self.result_lineEdit.setDisabled(True)
             final_width = self.size().width() - self.answers_area.size().width() - self.tableWidget.size().width() - 50
-            #table_widget_size = self.size().width(), self.
+            table_widget_size = self.size().width() , self. 
             self.set_table_size(table_sx, table_sy)
 
         file_name = "temp/ans_images/" + ans_name + ".png"
