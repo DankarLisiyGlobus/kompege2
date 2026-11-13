@@ -4,24 +4,45 @@ import sys
 import sqlite3
 import os
 import zipfile
-import io
+from login_form import KEGE_LOGIN
 
-DOWNLOAD_FOLDER = "home/dankar/Загрузки"
+
+#Код который надо поменять в зависимости от ОС
+DOWNLOAD_FOLDER = os.getcwd()
+
+def copy(path1:str, path2:str):
+    os.system(f"cp {path1} {path2}")
+
+def delete_temp():
+    os.system('rm -rf -- "temp"')
+
+#Кросс-платформенный код
 
 class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
-    def __init__(self, variant_name:str, fio:str):
+    def __init__(self, variant_name:str):
         super().__init__()
         self.setupUi(self)
         self.variant_name = variant_name
-        self.fio = fio
+
+        self.login_form = KEGE_LOGIN(self.variant_name)
+        self.login_form.show()
+        self.login_form.logged_in.connect(self.load)
+
+        self.result_button.clicked.connect(self.set_otvet)
+
+        self.otvets = {}
+        self.cur_ans_name = "Info"
+        self.cur_ans_type = "line"
+        self.buts = []
+
+    def load(self):
+        self.fio = self.login_form.fio
         self.fio_label.setText(self.fio)
-        with zipfile.ZipFile(f"variants/{self.variant_name}.tsk", "r") as z:
-            z.extractall("temp")
-        self.DB_PATH = "temp/" + variant_name + ".db"
+        self.DB_PATH = "temp/" + self.variant_name + ".db"
         self.generate_answers()
         self.tableWidget.hide()
-        self.cur_ans_name = "Info"
         self.set_content_answer("Info")
+        self.show()
 
     def generate_answers(self):
         con = sqlite3.connect(self.DB_PATH)
@@ -39,6 +60,7 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
             but = QtWidgets.QPushButton(self.answers[ans_i][1])
             but.setStyleSheet("color:black")
             but.clicked.connect(self.set_content_answer_with_sender)
+            self.buts.append(but)
             self.verticalLayout_2.addWidget(but)
         os.makedirs("temp", exist_ok=True)
         os.makedirs("temp/ans_images", exist_ok=True)
@@ -57,21 +79,23 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
         cursor.execute("SELECT ID from Questions WHERE number = ?", (ans_name,))
         ans_i = cursor.fetchone()[0] - 1
         con.close()
-        table_sx, table_sy = self.answers[ans_i][4], self.answers[ans_i][5]
+        table_sy, table_sx = self.answers[ans_i][4], self.answers[ans_i][5]
         if table_sx == 1 and table_sy == 1:
             self.tableWidget.hide()
             self.result_lineEdit.setDisabled(False)
             final_width = self.size().width() - self.answers_area.size().width() - 50
+            self.cur_ans_type = "line"
         elif table_sx == None and table_sy == None:
             self.tableWidget.hide()
             self.result_lineEdit.setDisabled(False)
             final_width = self.size().width() - self.answers_area.size().width() - 50
+            self.cur_ans_type = "line"
         else:
             self.tableWidget.show()
             self.result_lineEdit.setDisabled(True)
             final_width = self.size().width() - self.answers_area.size().width() - self.tableWidget.size().width() - 50
-            table_widget_size = self.size().width() , self. dvd
             self.set_table_size(table_sx, table_sy)
+            self.cur_ans_type = "table"
 
         file_name = "temp/ans_images/" + ans_name + ".png"
         pixmap = QtGui.QPixmap(file_name)
@@ -110,19 +134,39 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def download_file(self, filename:str):
         print(f"Перемещение в папку загрузок файла {filename}")
-
+        path = f"temp/{filename}"
+        copy(path, DOWNLOAD_FOLDER)
+        QtWidgets.QMessageBox.information(self, "Загрузка завершена", f"Загрузка файла {filename} завершена, проверьте загрузок")
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
         self.set_content_answer(self.cur_ans_name)
 
+    def set_otvet(self):
+        con = sqlite3.connect(self.DB_PATH)
+        cursor = con.cursor()
+        cursor.execute("SELECT ID from Questions WHERE number = ?", (self.cur_ans_name,))
+        ans_i = cursor.fetchone()[0] - 1
+        con.close()
+        if self.cur_ans_type == "line":
+            otvet_text = self.result_lineEdit.text()
+        else:
+            otvet_text = "данные из таблицы"
 
-try:
-    if __name__ == '__main__':
-        app = QtWidgets.QApplication(sys.argv)
-        ex = KEGE(variant_name = "04_04_2025_2noint", fio = "Иванов Иван Иванович")
-        ex.show()
-        app.exec()
-finally:
-    os.system('rm -rf -- "temp"')
-    #sys.exit()
+        self.otvets[ans_i] = otvet_text
+        
+
+def main(VARIANT_NAME):
+    if not os.path.exists("temp"):
+        with zipfile.ZipFile(f"variants/{VARIANT_NAME}.tsk", "r") as z:
+            z.extractall("temp")
+    ex = KEGE(variant_name=VARIANT_NAME)
+    return ex
+
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    window = main("04_04_2025_2noint")
+    code = app.exec()
+    delete_temp()
+    sys.exit(code)
