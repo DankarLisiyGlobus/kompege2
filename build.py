@@ -4,7 +4,7 @@ NAME = "KEGE"
 FLAGS = ["--onefile", "--windowed", f"--name={NAME}"]
 INPUT_MAIN_FILE = "main_window.py"
 INPUT_MODULES = ["kege.py", "kege_login.py", "login_form.py",
-                 "platform_kege.py", "end.py", "end_form.py"]
+                 "platform_kege.py", "end.py", "end_form.py", "stop_exam_with_code.py"]
 
 sep = ";" if os.name == "nt" else ":"
 

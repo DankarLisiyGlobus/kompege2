@@ -6,6 +6,7 @@ import sqlite3
 import os
 import zipfile
 from login_form import KEGE_LOGIN
+from stop_exam_with_code import KEGE_LOGOUT
 from end_form import KEGE_END
 from datetime import datetime
 
@@ -20,6 +21,16 @@ QPushButton:pressed {
     background-color: rgba(6, 209, 55, 130);
 }"""
 
+button_not_geted_otvet = """QPushButton {
+    color: black;
+    background-color: rgb(200, 200, 200);
+}
+QPushButton:hover {
+    background-color: rgb(233, 233, 233);
+}
+QPushButton:pressed {
+    background-color: rgb(255, 255, 255);
+}"""
 
 DOWNLOAD_FOLDER = os.getcwd()
 
@@ -44,7 +55,7 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
         self.cur_ans_name = "Info"
         self.cur_ans_type = "line"
         self.buts: list[QtWidgets.QPushButton] = []
-        self.stop_ege.clicked.connect(self.stop_exam)
+        self.stop_ege.clicked.connect(self.stop_exam_but)
 
         self.timer = QtCore.QTimer()
         self.timer.setInterval(1000)
@@ -104,7 +115,7 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
 
         for ans_i in range(self.count_of_quest + 1):
             but = QtWidgets.QPushButton(self.answers[ans_i][1])
-            but.setStyleSheet("color:black")
+            but.setStyleSheet(button_not_geted_otvet)
             but.clicked.connect(self.set_content_answer_with_sender)
             self.buts.append(but)
             self.verticalLayout_2.addWidget(but)
@@ -267,17 +278,23 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.otvets[ans_i] = otvet_text
 
-    def stop_exam(self):
+    def stop_exam_but(self):
         answer = QtWidgets.QMessageBox.question(
             self,
             'Подтверждение',
-            'Вы уверены, что хотите перезаписать файл?\nЭто действие необратимо!',
+            'Вы уверены, что хотите выйти с экзамена?\nЭто действие необратимо!',
             QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No,
             QtWidgets.QMessageBox.StandardButton.No  # Кнопка по умолчанию
         )
 
         if answer == QtWidgets.QMessageBox.StandardButton.No:
             return
+        self.logout_form = KEGE_LOGOUT(self.variant_name_)
+        self.logout_form.show()
+        self.logout_form.logged_in.connect(self.stop_exam)
+
+    def stop_exam(self):
+
         self.hide()
         self.generate_result_txt()
         self.end_form = KEGE_END()
@@ -314,7 +331,7 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
 
 def main(VARIANT_NAME):
     if not os.path.exists("temp"):
-        with zipfile.ZipFile(f"variants/{VARIANT_NAME}.tsk", "r") as z:
+        with zipfile.ZipFile(f"{VARIANT_NAME}.tsk", "r") as z:
             z.extractall("temp")
     ex = KEGE(variant_name=VARIANT_NAME)
     return ex
@@ -322,7 +339,21 @@ def main(VARIANT_NAME):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    window = main("variant2")
+    files = os.listdir(os.getcwd())
+    var_file_names = []
+    for file in files:
+        if file.split(".")[-1] in ["tsk"]:
+            var_file_names.append(file.split(".")[0])
+    if len(var_file_names) == 0:
+        QtWidgets.QMessageBox.critical(
+                        None, "Ошибка", "Не найден файл .tsk с заданиями")
+        sys.exit()
+    elif len(var_file_names) == 1:
+        VNAME = var_file_names[0]
+    else:
+        VNAME = var_file_names[0]
+    
+    window = main(VNAME)
     code = app.exec()
     delete_temp()
     sys.exit(code)
