@@ -31,17 +31,17 @@ class Ui_Form(object):
 "background-color: rgb(0, 170, 255);")
         self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.label, 4, 1, 1, 1)
         spacerItem1 = QtWidgets.QSpacerItem(32, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout.addItem(spacerItem1, 2, 2, 2, 1)
+        self.gridLayout.addItem(spacerItem1, 4, 2, 2, 1)
         spacerItem2 = QtWidgets.QSpacerItem(32, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.gridLayout.addItem(spacerItem2, 3, 0, 1, 1)
+        self.gridLayout.addItem(spacerItem2, 5, 0, 1, 1)
         self.codeLine = QtWidgets.QLineEdit(parent=Form)
         self.codeLine.setStyleSheet("color: rgb(0, 0, 0);\n"
 "background-color: rgb(255, 255, 255);\n"
 "")
         self.codeLine.setObjectName("codeLine")
-        self.gridLayout.addWidget(self.codeLine, 3, 1, 1, 1)
+        self.gridLayout.addWidget(self.codeLine, 5, 1, 1, 1)
         self.login_but = QtWidgets.QPushButton(parent=Form)
         self.login_but.setMaximumSize(QtCore.QSize(9999999, 16777215))
         self.login_but.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
@@ -59,16 +59,29 @@ class Ui_Form(object):
 "    background-color: rgba(6, 209, 55, 130);\n"
 "}")
         self.login_but.setObjectName("login_but")
-        self.gridLayout.addWidget(self.login_but, 4, 1, 1, 1)
+        self.gridLayout.addWidget(self.login_but, 6, 1, 1, 1)
         spacerItem3 = QtWidgets.QSpacerItem(20, 87, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.gridLayout.addItem(spacerItem3, 5, 1, 1, 1)
+        self.gridLayout.addItem(spacerItem3, 7, 1, 1, 1)
+        self.label_3 = QtWidgets.QLabel(parent=Form)
+        self.label_3.setStyleSheet("color: rgb(255, 255, 255); font-size: 16px;\n"
+"background-color: rgb(0, 170, 255);")
+        self.label_3.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.label_3.setObjectName("label_3")
+        self.gridLayout.addWidget(self.label_3, 2, 1, 1, 1)
+        self.fio_lineEdit = QtWidgets.QLineEdit(parent=Form)
+        self.fio_lineEdit.setStyleSheet("color: rgb(0, 0, 0);\n"
+"background-color: rgb(255, 255, 255);\n"
+"")
+        self.fio_lineEdit.setObjectName("fio_lineEdit")
+        self.gridLayout.addWidget(self.fio_lineEdit, 3, 1, 1, 1)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Вход в Тестирующую программу КЕГЭ"))
         self.label_2.setText(_translate("Form", "Тестирующая станция КЕГЭ"))
         self.label.setText(_translate("Form", "Введите код"))
         self.login_but.setText(_translate("Form", "Вход"))
+        self.label_3.setText(_translate("Form", "Введите ФИО"))

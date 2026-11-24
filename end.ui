@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>200</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Завершение экзамена</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget{
+	background-color: rgb(235, 235, 235);
+}
+/* Прозрачный фон самой области и её viewport */
+QScrollArea {
+    background: transparent;
+    border: none;
+}
+
+QScrollArea &gt; QWidget &gt; QWidget {
+    background: transparent;
+}
+
+/* Вертикальный скроллбар */
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 0;
+    border: none;
+}
+
+/* Дорожка (желоб) */
+QScrollBar::handle:vertical {
+    background: #c5cff5;          /* пастельный индиго под твою палитру */
+    min-height: 30px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #a8b6ec;
+}
+
+QScrollBar::handle:vertical:pressed {
+    background: #8a9ae0;
+}
+
+/* Убрать стрелки сверху/снизу */
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+    background: none;
+    border: none;
+}
+
+/* Убрать «страничные» зоны (клик по желобу) */
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+/* Горизонтальный — на случай, если появится */
+QScrollBar:horizontal {
+    background: transparent;
+    height: 10px;
+    margin: 0;
+    border: none;
+}
+
+QScrollBar::handle:horizontal {
+    background: #c5cff5;
+    min-width: 30px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #a8b6ec;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0;
+    background: none;
+    border: none;
+}
+
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+    background: none;
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255); font-size: 16px;background-color: rgb(85, 170, 255);</string>
+     </property>
+     <property name="text">
+      <string>Экзамен закончен!</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255); font-size: 16px;background-color: rgb(85, 170, 255);</string>
+     </property>
+     <property name="text">
+      <string>Ответы сохранены на диске</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: rgba(5, 175, 105, 130);
+    padding: 4px 4px;
+}
+QPushButton:hover {
+    background-color: rgba(1, 145, 68, 130);
+}
+QPushButton:pressed {
+    background-color: rgba(6, 209, 55, 130);
+}</string>
+     </property>
+     <property name="text">
+      <string>Выйти</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

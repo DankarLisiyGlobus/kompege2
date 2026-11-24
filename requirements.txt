@@ -1,0 +1,6 @@
+PyQt6
+bcrypt
+#zipfile
+#shutil
+#os
+#sqlite3
