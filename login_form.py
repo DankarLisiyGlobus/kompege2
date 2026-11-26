@@ -13,6 +13,7 @@ class KEGE_LOGIN(QtWidgets.QWidget, Ui_Form):
     def __init__(self, variant_name: str):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("logo.svg"))
         self.variant_name = variant_name
         files = os.listdir("temp")
         self.DB_PATH = ""

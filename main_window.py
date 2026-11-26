@@ -42,6 +42,7 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, variant_name: str):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("logo.svg"))
         self.variant_name_ = variant_name
         self.move(500, 300)
 

@@ -8,6 +8,7 @@ class KEGE_END(QtWidgets.QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("logo.svg"))
         self.pushButton.clicked.connect(self.stop)
         self._center()
 
