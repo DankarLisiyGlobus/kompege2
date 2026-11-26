@@ -279,24 +279,17 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
         self.otvets[ans_i] = otvet_text
 
     def stop_exam_but(self):
-        answer = QtWidgets.QMessageBox.question(
-            self,
-            'Подтверждение',
-            'Вы уверены, что хотите выйти с экзамена?\nЭто действие необратимо!',
-            QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No,
-            QtWidgets.QMessageBox.StandardButton.No  # Кнопка по умолчанию
-        )
-
-        if answer == QtWidgets.QMessageBox.StandardButton.No:
-            return
         self.logout_form = KEGE_LOGOUT(self.variant_name_)
         self.logout_form.show()
         self.logout_form.logged_in.connect(self.stop_exam)
 
     def stop_exam(self):
+        if hasattr(self, "logout_form"):
+            self.logout_form.close()
 
         self.hide()
         self.generate_result_txt()
+        self.timer.stop()
         self.end_form = KEGE_END()
         self.end_form.show()
         self.end_form.exited.connect(self.close)
