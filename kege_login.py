@@ -37,9 +37,29 @@ class Ui_Form(object):
         spacerItem2 = QtWidgets.QSpacerItem(32, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.gridLayout.addItem(spacerItem2, 5, 0, 1, 1)
         self.codeLine = QtWidgets.QLineEdit(parent=Form)
-        self.codeLine.setStyleSheet("color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);\n"
-"")
+        self.codeLine.setStyleSheet("QLineEdit {\n"
+"    color: black;\n"
+"    font-size: 14px;\n"
+"    border-radius:5px;\n"
+"    background-color:  rgb(240, 240, 240);\n"
+"    padding: 1px 1px;\n"
+"    border: 1px solid rgb(180, 180, 180);\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    background-color: rgb(233, 233, 233);\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid rgb(150, 150, 150);\n"
+"}\n"
+"\n"
+"QLineEdit:disabled {\n"
+"    color: rgb(130, 130, 130);\n"
+"    background-color: rgb(200, 200, 200);\n"
+"    border: 1px solid rgb(160, 160, 160);\n"
+"}")
         self.codeLine.setObjectName("codeLine")
         self.gridLayout.addWidget(self.codeLine, 5, 1, 1, 1)
         self.login_but = QtWidgets.QPushButton(parent=Form)
@@ -69,9 +89,29 @@ class Ui_Form(object):
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 2, 1, 1, 1)
         self.fio_lineEdit = QtWidgets.QLineEdit(parent=Form)
-        self.fio_lineEdit.setStyleSheet("color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);\n"
-"")
+        self.fio_lineEdit.setStyleSheet("QLineEdit {\n"
+"    color: black;\n"
+"    font-size: 14px;\n"
+"    border-radius:5px;\n"
+"    background-color:  rgb(240, 240, 240);\n"
+"    padding: 1px 1px;\n"
+"    border: 1px solid rgb(180, 180, 180);\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    background-color: rgb(233, 233, 233);\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid rgb(150, 150, 150);\n"
+"}\n"
+"\n"
+"QLineEdit:disabled {\n"
+"    color: rgb(130, 130, 130);\n"
+"    background-color: rgb(200, 200, 200);\n"
+"    border: 1px solid rgb(160, 160, 160);\n"
+"}")
         self.fio_lineEdit.setObjectName("fio_lineEdit")
         self.gridLayout.addWidget(self.fio_lineEdit, 3, 1, 1, 1)
 

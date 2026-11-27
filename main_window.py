@@ -12,18 +12,24 @@ from datetime import datetime
 
 button_geted_otvet = """QPushButton {
     color: rgb(255, 255, 255);
-    background-color: rgba(5, 175, 105, 130);
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: rgb(1, 175, 105);
+    padding: 4px 4px;
 }
 QPushButton:hover {
-    background-color: rgba(1, 145, 68, 130);
+    background-color: rgb(34, 215, 137);
 }
 QPushButton:pressed {
-    background-color: rgba(6, 209, 55, 130);
+    background-color: rgb(56, 245, 157);
 }"""
 
 button_not_geted_otvet = """QPushButton {
     color: black;
+    font-size: 14px;
+    border-radius: 5px;
     background-color: rgb(200, 200, 200);
+    padding: 4px 4px;
 }
 QPushButton:hover {
     background-color: rgb(233, 233, 233);
@@ -34,8 +40,6 @@ QPushButton:pressed {
 
 DOWNLOAD_FOLDER = os.getcwd()
 
-
-# Кросс-платформенный код
 
 
 class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):

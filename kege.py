@@ -189,8 +189,60 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
         self.tableWidget.setSizePolicy(sizePolicy)
-        self.tableWidget.setStyleSheet("color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);")
+        self.tableWidget.setStyleSheet("QTableWidget {\n"
+"    color: rgb(0, 0, 0);\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    font-size: 14px;\n"
+"    border: 1px solid rgb(210, 210, 210);\n"
+"    border-radius: 5px;\n"
+"    gridline-color: rgb(225, 225, 225);\n"
+"    selection-color: rgb(0, 0, 0);\n"
+"    selection-background-color: rgb(225, 238, 250);\n"
+"}\n"
+"\n"
+"QTableWidget::item {\n"
+"    color: rgb(0, 0, 0);\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    padding: 4px;\n"
+"}\n"
+"\n"
+"QTableWidget::item:hover {\n"
+"    background-color: rgb(248, 248, 248);\n"
+"}\n"
+"\n"
+"QTableWidget::item:selected {\n"
+"    color: rgb(0, 0, 0);\n"
+"    background-color: rgb(225, 238, 250);\n"
+"}\n"
+"\n"
+"QTableWidget QLineEdit {\n"
+"    color: rgb(0, 0, 0);\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    selection-color: rgb(0, 0, 0);\n"
+"    selection-background-color: rgb(200, 220, 245);\n"
+"    border: 1px solid rgb(170, 195, 220);\n"
+"    padding: 2px;\n"
+"}\n"
+"\n"
+"QTableWidget:disabled {\n"
+"    color: rgb(140, 140, 140);\n"
+"    background-color: rgb(245, 245, 245);\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    color: rgb(0, 0, 0);\n"
+"    background-color: rgb(235, 235, 235);\n"
+"    font-size: 14px;\n"
+"    padding: 5px;\n"
+"    border: none;\n"
+"    border-right: 1px solid rgb(215, 215, 215);\n"
+"    border-bottom: 1px solid rgb(215, 215, 215);\n"
+"}\n"
+"\n"
+"QTableCornerButton::section {\n"
+"    background-color: rgb(235, 235, 235);\n"
+"    border: none;\n"
+"}")
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
@@ -202,9 +254,29 @@ class Ui_MainWindow(object):
         self.files_lay.setObjectName("files_lay")
         self.res_download_lay.addLayout(self.files_lay)
         self.result_lineEdit = QtWidgets.QLineEdit(parent=self.centralwidget)
-        self.result_lineEdit.setStyleSheet("color: rgb(0, 0, 0);\n"
-"background-color: rgb(255, 255, 255);\n"
-"")
+        self.result_lineEdit.setStyleSheet("QLineEdit {\n"
+"    color: black;\n"
+"    font-size: 14px;\n"
+"    border-radius:5px;\n"
+"    background-color:  rgb(240, 240, 240);\n"
+"    padding: 1px 1px;\n"
+"    border: 1px solid rgb(180, 180, 180);\n"
+"}\n"
+"\n"
+"QLineEdit:hover {\n"
+"    background-color: rgb(233, 233, 233);\n"
+"}\n"
+"\n"
+"QLineEdit:focus {\n"
+"    background-color: rgb(255, 255, 255);\n"
+"    border: 1px solid rgb(150, 150, 150);\n"
+"}\n"
+"\n"
+"QLineEdit:disabled {\n"
+"    color: rgb(130, 130, 130);\n"
+"    background-color: rgb(200, 200, 200);\n"
+"    border: 1px solid rgb(160, 160, 160);\n"
+"}")
         self.result_lineEdit.setObjectName("result_lineEdit")
         self.res_download_lay.addWidget(self.result_lineEdit)
         self.result_button = QtWidgets.QPushButton(parent=self.centralwidget)
@@ -217,10 +289,10 @@ class Ui_MainWindow(object):
 "    padding: 4px 4px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: rgba(1, 145, 68, 130);\n"
+"    background-color: rgba(34, 215, 137, 130);\n"
 "}\n"
 "QPushButton:pressed {\n"
-"    background-color: rgba(6, 209, 55, 130);\n"
+"    background-color: rgba(56, 245, 157, 130);\n"
 "}")
         self.result_button.setObjectName("result_button")
         self.res_download_lay.addWidget(self.result_button)
