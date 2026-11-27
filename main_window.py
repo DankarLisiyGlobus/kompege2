@@ -283,6 +283,9 @@ class KEGE(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.otvets[ans_i] = otvet_text
 
+    def closeEvent(self, event):
+        event.ignore()
+
     def stop_exam_but(self):
         self.logout_form = KEGE_LOGOUT(self.variant_name_)
         self.logout_form.show()
